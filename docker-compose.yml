@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  registry:
+    image: registry:2
+    ports:
+    - "5000:5000"
+    volumes:
+    - /data/registry:/mnt/registry
+    restart: unless-stopped
+  registry_ui:
+    image: konradkleine/docker-registry-frontend:v2
+    ports:
+    - "90:80"
+    environment:
+    - ENV_DOCKER_REGISTRY_HOST=registry
+    - ENV_DOCKER_REGISTRY_PORT=5000
+    restart: unless-stopped
+
+
+
+
